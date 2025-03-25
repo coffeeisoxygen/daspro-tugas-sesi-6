@@ -1,6 +1,6 @@
 import json
 import colorama
-from colorama import Fore
+from colorama import Fore, Back, Style
 
 # Initialize colorama
 colorama.init(autoreset=True)
@@ -51,29 +51,31 @@ def determine_grade(score: float, criteria: Dict[str, Dict[str, Any]]) -> Tuple[
             return grade, info
     return None, None
 
-def get_color_code(color_name: str) -> str:
-    """Convert color name to colorama color code"""
-    color_map = {
-        "red": Fore.RED,
-        "green": Fore.GREEN,
-        "blue": Fore.BLUE,
-        "yellow": Fore.YELLOW,
-        "purple": Fore.MAGENTA,  # Using MAGENTA for purple
-        "cyan": Fore.CYAN,
-        "white": Fore.WHITE
+def get_enhanced_color_code(color_name: str) -> str:
+    """Get enhanced color combinations for better visual distinction"""
+    color_schemes = {
+        "purple": f"{Fore.MAGENTA}{Style.BRIGHT}",  # A grade
+        "green": f"{Fore.GREEN}{Style.BRIGHT}",     # B grade
+        "blue": f"{Fore.BLUE}{Style.BRIGHT}",       # C grade
+        "yellow": f"{Fore.YELLOW}",                 # D grade
+        "red": f"{Fore.RED}{Style.BRIGHT}",         # E grade
+        "cyan": f"{Fore.CYAN}",
+        "white": f"{Fore.WHITE}"
     }
-    return color_map.get(color_name.lower(), Fore.WHITE)
+    return color_schemes.get(color_name.lower(), f"{Style.RESET_ALL}")
 
 def display_result(score: float, grade: str, info: Dict[str, Any]):
-    """Display the result with colored output based on grade"""
-    color_code = get_color_code(info["color"])
+    """Display the result with enhanced colored output based on grade"""
+    color_code = get_enhanced_color_code(info["color"])
 
-    print(f"\n{color_code}=================================")
-    print(f"{color_code}Nilai: {score:.2f}")
-    print(f"{color_code}Grade: {grade}")
-    print(f"{color_code}Predikat: {info['predicate']}")
-    print(f"{color_code}Status: {info['status']}")
-    print(f"{color_code}=================================\n")
+    print(f"\n{color_code}╔════════════════════════════════════════╗{Style.RESET_ALL}")
+    print(f"{color_code}║            HASIL PENILAIAN             ║{Style.RESET_ALL}")
+    print(f"{color_code}╠════════════════════════════════════════╣{Style.RESET_ALL}")
+    print(f"{color_code}║ Nilai    : {score:>25.2f} ║{Style.RESET_ALL}")
+    print(f"{color_code}║ Grade    : {grade:>25} ║{Style.RESET_ALL}")
+    print(f"{color_code}║ Predikat : {info['predicate']:>25} ║{Style.RESET_ALL}")
+    print(f"{color_code}║ Status   : {info['status']:>25} ║{Style.RESET_ALL}")
+    print(f"{color_code}╚════════════════════════════════════════╝{Style.RESET_ALL}\n")
 
 def main():
     # Load criteria from JSON
@@ -82,7 +84,7 @@ def main():
         return
 
     while True:
-        print(f"\n{Fore.CYAN}==== PROGRAM PENILAIAN KELULUSAN ====\n")
+        print(f"\n{Fore.CYAN}{Back.BLACK}{Style.BRIGHT}==== PROGRAM PENILAIAN KELULUSAN ====\n")
 
         # Get valid score input
         score = get_valid_score()
@@ -103,7 +105,7 @@ def main():
             print(f"{Fore.RED}Error: Masukkan 'y' untuk ya atau 'n' untuk tidak.")
 
         if continue_choice == 'n':
-            print(f"\n{Fore.CYAN}Terima kasih telah menggunakan program ini!")
+            print(f"\n{Fore.CYAN}{Back.BLACK}{Style.BRIGHT}Terima kasih telah menggunakan program ini!")
             break
 
 if __name__ == "__main__":

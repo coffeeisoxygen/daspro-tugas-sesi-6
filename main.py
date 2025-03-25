@@ -1,7 +1,6 @@
 import json
-import os
 import colorama
-from colorama import Fore, Back, Style
+from colorama import Fore
 
 # Initialize colorama
 colorama.init(autoreset=True)
@@ -43,14 +42,16 @@ def get_valid_score():
         except ValueError:
             print(f"{Fore.RED}Error: Input harus berupa angka!")
 
-def determine_grade(score, criteria):
+from typing import Tuple, Dict, Any
+
+def determine_grade(score: float, criteria: Dict[str, Dict[str, Any]]) -> Tuple[str | None, Dict[str, Any] | None]:
     """Determine grade based on score and criteria"""
     for grade, info in criteria.items():
         if info["min"] <= score <= info["max"]:
             return grade, info
     return None, None
 
-def get_color_code(color_name):
+def get_color_code(color_name: str) -> str:
     """Convert color name to colorama color code"""
     color_map = {
         "red": Fore.RED,
@@ -63,7 +64,7 @@ def get_color_code(color_name):
     }
     return color_map.get(color_name.lower(), Fore.WHITE)
 
-def display_result(score, grade, info):
+def display_result(score: float, grade: str, info: Dict[str, Any]):
     """Display the result with colored output based on grade"""
     color_code = get_color_code(info["color"])
 

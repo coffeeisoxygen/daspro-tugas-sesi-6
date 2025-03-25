@@ -1,0 +1,37 @@
+{
+  "A": {
+    "min": 90,
+    "max": 100,
+    "predicate": "Dengan Pujian",
+    "status": "LULUS",
+    "color": "purple"
+  },
+  "B": {
+    "min": 80,
+    "max": 89.99,
+    "predicate": "Sangat Memuaskan",
+    "status": "LULUS",
+    "color": "green"
+  },
+  "C": {
+    "min": 70,
+    "max": 79.99,
+    "predicate": "Memuaskan",
+    "status": "LULUS",
+    "color": "blue"
+  },
+  "D": {
+    "min": 60,
+    "max": 69.99,
+    "predicate": "Tidak Memuaskan",
+    "status": "LULUS",
+    "color": "yellow"
+  },
+  "E": {
+    "min": 0,
+    "max": 59.99,
+    "predicate": "Gagal",
+    "status": "TIDAK LULUS",
+    "color": "red"
+  }
+}

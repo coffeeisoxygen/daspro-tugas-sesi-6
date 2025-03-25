@@ -1,6 +1,7 @@
 import json
 import colorama
 from colorama import Fore, Back, Style
+from typing import Tuple, Dict, Any
 
 # Initialize colorama
 colorama.init(autoreset=True)
@@ -42,7 +43,7 @@ def get_valid_score():
         except ValueError:
             print(f"{Fore.RED}Error: Input harus berupa angka!")
 
-from typing import Tuple, Dict, Any
+
 
 def determine_grade(score: float, criteria: Dict[str, Dict[str, Any]]) -> Tuple[str | None, Dict[str, Any] | None]:
     """Determine grade based on score and criteria"""
